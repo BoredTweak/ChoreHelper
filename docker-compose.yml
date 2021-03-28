@@ -1,0 +1,40 @@
+version: '3'
+services:
+
+  flyway:
+    image: flyway/flyway:7.7.1
+    environment:
+         - FLYWAY_USER=docker
+         - FLYWAY_PASSWORD=docker
+    command: migrate 
+              -url=jdbc:postgresql://postgres:5432/choredb 
+              -locations=filesystem:/flyway/sql 
+              -connectRetries=60
+              -mixed=true
+    volumes:
+      - ./sql:/flyway/sql
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:11
+    restart: always
+    ports:
+    - "5432:5432"
+    environment:
+    - POSTGRES_USER=docker
+    - POSTGRES_PASSWORD=docker
+    volumes:
+      - ./sql/initdb.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on: 
+      - postgres
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-user@domain.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-docker}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports: 
+      - "5431:80"
+    restart: always
