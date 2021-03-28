@@ -10,6 +10,8 @@ It's easy to get behind in home maintenance/chores and it's easy to stop seeing 
 
 ## Local Development
 
+For Angular local development insights view the readme [here](./apps/choreui/README.md).
+
 ### WebAPI
 
 In order to build the WebAPI, run ```dotnet build``` from the [```./apps/webapi/```](/apps/webapi/) directory.
