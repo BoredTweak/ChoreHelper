@@ -1,0 +1,15 @@
+<div class="container-fluid vh-100">
+  <app-header></app-header>
+  <div class="row h-25 align-items-center">
+    <div class="col text-center">
+      <h1>{{selectedChore || "Chore!"}}</h1>
+    </div>
+  </div>
+  <div class="row h-25">
+    <div class="col text-center">
+      <button class="btn btn-primary w-50 h-100"><h1>Chore Me!</h1></button>      
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
