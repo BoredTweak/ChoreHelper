@@ -24,10 +24,10 @@ jobs:
         dotnet-version: ${{ matrix.dotnet-version }}
 
     - name: Install dependencies
-      run: dotnet restore /apps/webapi/
+      run: dotnet restore ./apps/webapi
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore /apps/webapi/
+      run: dotnet build --configuration Release --no-restore ./apps/webapi
 
   ui-build:
     runs-on: ubuntu-latest
@@ -45,15 +45,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Clean Install
-      working-directory: /apps/choreui
+      working-directory: ./apps/choreui
       run: npm ci
 
     - name: Build
-      working-directory: /apps/choreui
+      working-directory: ./apps/choreui
       run: npm run build --if-present
 
     - name: Test
-      working-directory: /apps/choreui
+      working-directory: ./apps/choreui
       run: npm test
 
   integration-test:
@@ -68,4 +68,4 @@ jobs:
       run: docker-compose -f docker-compose-full-integration.yml up -d
       
     - name: Integration Test
-      run: newman run tests/Chores.postman_collection.json
+      run: newman run ./tests/Chores.postman_collection.json
