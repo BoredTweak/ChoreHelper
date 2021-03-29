@@ -2,6 +2,12 @@
 
 It's easy to get behind in home maintenance/chores and it's easy to stop seeing the tasks that need to be done. Rather than relying on someone else to communicate the problems, ChoreHelper aims to offer you an option so you can fix the problem yourself.
 
+- [ChoreHelper](#chorehelper)
+  - [Prerequisites](#prerequisites)
+  - [Local Development](#local-development)
+    - [Database](#database)
+    - [Docker Images](#docker-images)
+
 ## Prerequisites
 
 - [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
@@ -10,20 +16,8 @@ It's easy to get behind in home maintenance/chores and it's easy to stop seeing 
 
 ## Local Development
 
-For Angular local development insights view the readme [here](./apps/choreui/README.md).
-
-### WebAPI
-
-In order to build the WebAPI, run ```dotnet build``` from the [```./apps/webapi/```](/apps/webapi/) directory.
-
-You will need to configure the connection string to your database. It is encouraged that you leverage the dotnet user-secrets tool to accomplish this. In order to configure a dotnet user-secret for the docker-compose instance of postgres, run the following command from the [```./apps/webapi/```](/apps/webapi/) directory.
-
-```
-dotnet user-secrets set ConnectionStrings:ChoreDb "Username=docker;Password=docker;Host=host.docker.internal;Database=choredb;"
-```
-
-To run the webapi code locally, run ```dotnet run``` from the [```./apps/webapi/```](/apps/webapi/) directory.
-
+For development insights specific to the Angular ChoreUI application view the readme [here](./apps/choreui/README.md).
+For development insights specific to the .NET WebAPI application view the readme [here](./apps/webapi/README.md).
 
 ### Database
 
@@ -44,25 +38,8 @@ For more information on the Docker images used in this repository refer to the f
 - [Flyway](https://hub.docker.com/r/flyway/flyway)
 - [PgAdmin](https://hub.docker.com/r/dpage/pgadmin4/)
 - [Postgres](https://hub.docker.com/_/postgres)
+- [ASP.NET SDK](https://hub.docker.com/_/microsoft-dotnet-sdk)
+- [ASP.NET Runtime](https://hub.docker.com/_/microsoft-dotnet-aspnet)
+- [node](https://hub.docker.com/_/node)
+- [nginx](https://hub.docker.com/_/nginx)
 
-### Entity Framework
-
-The [WebAPI](./apps/webapi/) uses Entity Framework to establish it's data access layer. 
-
-In order to scaffold the database (generate Entity Framework code) in the webapi project you must first install the Entity Framework .NET CLI tools.
-```
-dotnet tool install --global dotnet-ef
-```
-
-In order to update the scaffolded code first start up the docker-compose database instance per [the Database section of the README](#database).
-
-Then run the following command from ```./apps/webapi/```
-```
-dotnet ef dbcontext scaffold "Username=docker;Password=docker;Host=host.docker.internal;Database=choredb;" Npgsql.EntityFrameworkCore.PostgreSQL -o NewModels --no-onconfiguring --context-namespace Models
-``` 
-
-Delete [the Models directory](apps/webapi/Models/).
-
-Rename the NewModels directory to Models.
-
-For more information on Entity Framework look [here](https://docs.microsoft.com/en-us/ef/core/cli/dotnet)
