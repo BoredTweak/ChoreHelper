@@ -7,6 +7,7 @@ It's easy to get behind in home maintenance/chores and it's easy to stop seeing 
   - [Local Development](#local-development)
     - [Database](#database)
     - [Docker Images](#docker-images)
+  - [Local Testing](#local-testing)
 
 ## Prerequisites
 
@@ -43,3 +44,24 @@ For more information on the Docker images used in this repository refer to the f
 - [node](https://hub.docker.com/_/node)
 - [nginx](https://hub.docker.com/_/nginx)
 
+## Local Testing
+
+A [docker-compose-full-integration](docker-compose-full-integration.yml) definition file is available for use which establishes a full application stack for local testing. 
+
+To run the docker-compose run
+```
+docker-compose -f .\docker-compose-full-integration.yml up
+```
+
+To view the Chore UI, navigate to [localhost:4200](http://localhost:4200)
+To view the WebAPI, navigate to [localhost:5000](http://localhost:5000)
+
+To clean up the containers use Ctrl+C followed by running
+```
+docker-compose -f .\docker-compose-full-integration.yml down
+```
+
+If the images are stale and you wish to rebuild them run
+```
+docker-compose -f .\docker-compose-full-integration.yml build
+```

@@ -11,5 +11,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-EXPOSE 5000
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+EXPOSE 80
+ENTRYPOINT ["dotnet", "webapi.dll"]

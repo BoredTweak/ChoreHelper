@@ -1,9 +1,11 @@
 FROM node:12.2.0 as build
+ENV choreapi http://localhost:5000
 RUN npm install -g @angular/cli
 COPY package.json package-lock.json ./app/
 WORKDIR /app
 RUN npm install
 COPY . /app
+RUN echo "{ \"chore_api\": { \"target\": \"${choreapi}\" } }\"" > /app/config.prod.json
 RUN npm run build
 
 FROM nginx:1.19.8-alpine as dist
