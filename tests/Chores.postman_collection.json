@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "945d6092-b43e-49e0-8272-6a7f3e8d8d21",
+		"name": "Chores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Happy Path",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is a valid chore entity\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.be.a('string');\r",
+							"    pm.expect(jsonData.frequencydays).to.be.a('number');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(36);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/chores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chores"
+					]
+				},
+				"description": "A valid request should return a chore entity"
+			},
+			"response": []
+		}
+	]
+}
