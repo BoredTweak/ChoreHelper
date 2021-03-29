@@ -25,10 +25,10 @@ jobs:
         dotnet-version: ${{ matrix.dotnet-version }}
 
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore apps\webapi\
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore apps\webapi\
 
   ui-build:
     runs-on: ubuntu-latest
@@ -47,12 +47,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Clean Install
+      working-directory: \apps\choreui
       run: npm ci
 
     - name: Build
+      working-directory: \apps\choreui
       run: npm run build --if-present
-    
+
     - name: Test
+      working-directory: \apps\choreui
       run: npm test
 
   integration-test:
