@@ -8,7 +8,7 @@ services:
     environment:
       choreapi: webapi
     depends_on:
-    - webapi
+      - webapi
 
   webapi:
     build: ./apps/webapi/
@@ -16,8 +16,14 @@ services:
     - 5000:80
     environment:
     - ConnectionStrings__ChoreDb=Username=docker;Password=docker;Host=postgres;Database=choredb;
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://webapi/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   flyway:
     image: flyway/flyway:7.7.1
@@ -32,7 +38,8 @@ services:
     volumes:
       - ./sql:/flyway/sql
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   postgres:
     image: postgres:11
@@ -44,11 +51,17 @@ services:
     - POSTGRES_PASSWORD=docker
     volumes:
       - ./sql/initdb.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     image: dpage/pgadmin4
-    depends_on: 
-      - postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment: 
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-user@domain.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-docker}
