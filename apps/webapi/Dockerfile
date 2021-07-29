@@ -11,5 +11,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
+HEALTHCHECK --interval=5s --timeout=10s --retries=3 CMD curl --fail http://localhost:80/healthcheck || exit 1
+
 EXPOSE 80
 ENTRYPOINT ["dotnet", "webapi.dll"]
