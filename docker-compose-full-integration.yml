@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
 
   choreui:
@@ -7,8 +7,6 @@ services:
     - 4200:80
     environment:
       choreapi: webapi
-    depends_on:
-      - webapi
 
   webapi:
     build: ./apps/webapi/
@@ -17,7 +15,7 @@ services:
     environment:
     - ConnectionStrings__ChoreDb=Username=docker;Password=docker;Host=postgres;Database=choredb;
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://webapi/health"]
+      test: curl -f http://localhost:5000/health || exit 1
       interval: 5s
       timeout: 10s
       retries: 5
