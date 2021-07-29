@@ -1,4 +1,4 @@
-FROM node:12.2.0 as build
+FROM node:16-alpine as build
 ENV choreapi http://localhost:5000
 RUN npm install -g @angular/cli
 COPY package.json package-lock.json ./app/
