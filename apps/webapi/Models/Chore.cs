@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace webapi.Models
+namespace chore_api.NewModels
 {
     public partial class Chore
     {

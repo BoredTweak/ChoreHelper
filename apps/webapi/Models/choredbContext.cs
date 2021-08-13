@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using chore_api.NewModels;
 
 #nullable disable
 
-namespace webapi.Models
+namespace Models
 {
     public partial class choredbContext : DbContext
     {
