@@ -13,16 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        dotnet: [ '6.0.x' ]
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
-      uses: actions/setup-dotnet@v1.7.2
+    - name: Setup .NET Core SDK 6.0.x
+    - uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        dotnet-version: '6.0.x'
         include-prerelease: true
 
     - name: Install dependencies
@@ -36,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [15.x, 16.x] # Angular no longer support Node.js version of < 15
+        node-version: [15.x, 16.x] # Angular 12 no longer support Node.js version of < 15
 
     steps:
     - uses: actions/checkout@v2
