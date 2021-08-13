@@ -2,21 +2,6 @@
 
 It's easy to get behind in home maintenance/chores and it's easy to stop seeing the tasks that need to be done. Rather than relying on someone else to communicate the problems, ChoreHelper aims to offer you an option so you can fix the problem yourself.
 
-- [ChoreHelper](#chorehelper)
-  - [Prerequisites](#prerequisites)
-    - [.NET 5.0](#net-50)
-    - [Node](#node)
-    - [Docker](#docker)
-    - [Postman](#postman)
-    - [Newman](#newman)
-  - [Local Development](#local-development)
-    - [Database](#database)
-    - [Docker Images](#docker-images)
-  - [Local Testing](#local-testing)
-    - [Integration Tests](#integration-tests)
-    - [Cleanup](#cleanup)
-    - [Build](#build)
-
 ## Prerequisites
 
 ### .NET 5.0
